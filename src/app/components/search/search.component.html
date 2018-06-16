@@ -1,0 +1,54 @@
+<h1> Check where is your train.</h1>
+<p> This application helps you to find the current position of the train. Please provide train number and jurney date to see
+  live status.</p>
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-5">
+        <input type="text" placeholder="Enter train number..." class="form-control" [(ngModel)]="searchStr" name="searchStr">
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="dateStr" name="dateStr">
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+<br/>
+<div *ngIf="trainResult">
+  <div *ngIf="trainName">
+    <h4> The train
+      <b class="text-success">{{trainName}}</b> is currently at
+      <b class="text-success">{{trainResult.name}} </b>
+    </h4>
+    <p> {{trainPosition}}</p>
+  </div>
+</div>
+
+<div *ngIf="allRoutes">
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-active">
+        <th scope="col">Stops</th>
+        <th scope="col">Station</th>
+        <th scope="col">Sceduled Arrival</th>
+        <th scope="col">Actual Arrival</th>
+        <th scope="col">Departure</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-dark" *ngFor="let route of allRoutes; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{route.station.name}}</td>
+        <td>{{route.scharr}}</td>
+        <td>{{route.actarr}}</td>
+        <td>{{route.actdep}}</td>
+        <td>{{route.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="text-center" >Developed by <a href="https://github.com/rohitgbg"> R&#9825;HIT</a></p>
+</div>
